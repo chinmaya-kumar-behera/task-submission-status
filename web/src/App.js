@@ -1,14 +1,48 @@
+import { useEffect, useState } from "react";
 import { CiSearch } from "react-icons/ci";
+import axios from "axios";
 
 function App() {
+  const [data, setData] = useState([]);
+  const url = "http://localhost:5000/testcases";
+
+  const fetchData = async () => {
+    try {
+      const response = await axios.get(url);
+      setData(response.data);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const onStatusChangeHandler = async (event, id) => {
+    const newStatus = event.target.value;
+    try {
+      await axios.put(`${url}/${id}`, { status: newStatus });
+      // Update the local state to reflect the change
+      setData(
+        data.map((item) =>
+          item.id === id ? { ...item, status: newStatus } : item
+        )
+      );
+    } catch (error) {
+      console.error("Error updating status:", error);
+    }
+  };
+
   return (
-    <div className="min-h-full w-full bg-[#01193d] text-white">
+    <div className="min-h-screen w-full bg-[#01193d] text-white">
       <div className="h-20 border-b border-white"></div>
       <div className="p-10">
         <div className="w-full flex items-center justify-center mb-5">
           <div className="w-full max-w-[500px] flex bg-[#012964] rounded-2xl">
             <input
               type="text"
+              placeholder="Search Issues"
               className="w-full rounded-3xl px-5 py-3 bg-transparent"
             />
             <button className="px-5 py-2 rounded-2xl bg-[#e64aa1]">
@@ -28,31 +62,49 @@ function App() {
               </tr>
             </thead>
 
-            <tbody className="">
-              <tr className="text-center">
-                <td>
-                  <div className="w-full p-5">
-                    <div className="text-left mb-1">
-                      <span>Test Case ID:</span>
-                    </div>
-                    <div className="flex flex-col justify-between items-start bg-gray-500 h-20 p-1">
-                      <span>hii</span>
-                      <span>
-                        <small>Last updated 5 mins ago</small>
-                      </span>
-                    </div>
-                  </div>
-                </td>
-                <td>5mins</td>
-                <td>onboarding</td>
-                <td>low</td>
-                <td className="">
-                  <select className="max-w-[150px] bg-transparent border px-2 py-1">
-                    <option>PASS</option>
-                    <option>FAIL</option>
-                  </select>
-                </td>
-              </tr>
+            <tbody>
+              {data.length > 0 ? (
+                data.map((item) => (
+                  <tr key={item.id} className="text-center">
+                    <td>
+                      <div className="w-full p-5">
+                        <div className="text-left mb-1">
+                          <span>Test Case ID: {item.id}</span>
+                        </div>
+                        <div className="flex flex-col justify-between items-start bg-gray-500 h-20 p-1">
+                          <span></span>
+                          <span>
+                            <small className="text-gray-300">
+                              Last updated 5 mins ago
+                            </small>
+                          </span>
+                        </div>
+                      </div>
+                    </td>
+                    <td>{item.estimate_time}</td>
+                    <td>{item.module}</td>
+                    <td>{item.priority}</td>
+                    <td>
+                      <select
+                        className="max-w-[150px] bg-transparent border px-2 py-1"
+                        onChange={(event) =>
+                          onStatusChangeHandler(event, item.id)
+                        }
+                        value={item.status}
+                      >
+                        <option value="PASS">PASS</option>
+                        <option value="FAIL">FAIL</option>
+                      </select>
+                    </td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td colSpan="5" className="text-center py-5">
+                    No data available
+                  </td>
+                </tr>
+              )}
             </tbody>
           </table>
         </div>
