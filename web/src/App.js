@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { CiSearch } from "react-icons/ci";
 import axios from "axios";
+import { FaFilter } from "react-icons/fa6";
 
 function App() {
   const [data, setData] = useState([]);
@@ -43,10 +44,17 @@ function App() {
             <input
               type="text"
               placeholder="Search Issues"
-              className="w-full rounded-3xl px-5 py-3 bg-transparent"
+              className="w-full rounded-3xl px-5 py-3 bg-transparent outline-none"
             />
             <button className="px-5 py-2 rounded-2xl bg-[#e64aa1]">
               <CiSearch className="text-3xl" />
+            </button>
+          </div>
+        </div>
+        <div className="flex justfy-start mb-3">
+          <div className="">
+            <button className="flex items-center px-3 py-2 gap-2 bg-[#0a3773]">
+              filter <FaFilter />
             </button>
           </div>
         </div>
@@ -92,8 +100,8 @@ function App() {
                         }
                         value={item.status}
                       >
-                        <option value="PASS">PASS</option>
-                        <option value="FAIL">FAIL</option>
+                        <option value="PASS" className="bg-black">PASS</option>
+                        <option value="FAIL" className="bg-black">FAIL</option>
                       </select>
                     </td>
                   </tr>
