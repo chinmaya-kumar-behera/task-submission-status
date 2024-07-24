@@ -33,11 +33,11 @@ This project is a web application that dynamically manages test cases using a Re
 
 ### 1. Clone the Repository
 
-```bash
-git clone <repository-url>
-cd <repository-folder>
+```
+    git clone <repository-url>
+    cd <repository-folder>
 
-```bash
+```
 
 
 2. Setup the MySQL Database
