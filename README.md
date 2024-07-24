@@ -71,51 +71,37 @@ VALUES
 3. Setting Up the Backend (Flask)
 Create a Virtual Environment:
 
-bash
-Copy code
 python -m venv venv
 Activate the Virtual Environment:
 
 On Windows:
 
-bash
-Copy code
 venv\Scripts\activate
 On macOS/Linux:
 
-bash
-Copy code
 source venv/bin/activate
 Install Dependencies:
 
-bash
-Copy code
 pip install Flask Flask-Cors mysql-connector-python
 Create app.py File:
 
 Run the Flask Server:
-
-bash
-Copy code
 python app.py
+
 4. Setting Up the Frontend (React)
 Navigate to the Frontend Directory:
 
-bash
-Copy code
 cd frontend
 Install Dependencies:
 
-bash
-Copy code
+
 npm install
 Start the React Development Server:
 
-bash
-Copy code
 npm start
 5. Accessing the Application
 Frontend: Open your browser and navigate to http://localhost:3000 to access the React application.
 Backend: The Flask server runs on http://localhost:5000 and handles API requests from the React frontend.
-Conclusion
+
+#Conclusion
 This project provides a comprehensive example of integrating a React frontend with a Flask backend and a MySQL database. It includes functionality for displaying and updating test case data in real-time. Follow the setup instructions to run the project locally and explore its features.
