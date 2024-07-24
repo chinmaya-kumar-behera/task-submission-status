@@ -34,8 +34,8 @@ This project is a web application that dynamically manages test cases using a Re
 ### 1. Clone the Repository
 
 ```
-    git clone <repository-url>
-    cd <repository-folder>
+git clone <repository-url>
+cd <repository-folder>
 
 ```
 
@@ -43,13 +43,11 @@ This project is a web application that dynamically manages test cases using a Re
 2. Setup the MySQL Database
 Create the Database:
 
-sql
-Copy code
+```
 CREATE DATABASE testcases_db;
 Create the Table:
+```
 
-sql
-Copy code
 USE testcases_db;
 
 CREATE TABLE testcases (
@@ -60,35 +58,31 @@ CREATE TABLE testcases (
     priority ENUM('Low', 'Mid', 'High') NOT NULL,
     status ENUM('PASS', 'FAIL') NOT NULL
 );
-Insert Initial Records:
 
-sql
-Copy code
-INSERT INTO testcases (testcase_name, estimate_time, module, priority, status)
-VALUES 
-    ('Test Case 1', 1.50, 'Module A', 'High', 'PASS'),
-    ('Test Case 2', 2.00, 'Module B', 'Low', 'FAIL'),
-    ('Test Case 3', 0.75, 'Module C', 'Mid', 'PASS'),
-    ('Test Case 4', 1.25, 'Module D', 'High', 'FAIL');
 3. Setting Up the Backend (Flask)
 Create a Virtual Environment:
-
+```
 python -m venv venv
 Activate the Virtual Environment:
-
+```
 On Windows:
-
+```
 venv\Scripts\activate
+```
 On macOS/Linux:
-
+```
 source venv/bin/activate
+```
 Install Dependencies:
-
+```
 pip install Flask Flask-Cors mysql-connector-python
+```
 Create app.py File:
 
 Run the Flask Server:
+```
 python app.py
+```
 
 4. Setting Up the Frontend (React)
 Navigate to the Frontend Directory:
@@ -96,8 +90,9 @@ Navigate to the Frontend Directory:
 cd frontend
 Install Dependencies:
 
-
+```
 npm install
+```
 Start the React Development Server:
 
 npm start
